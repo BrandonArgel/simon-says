@@ -1,0 +1,14 @@
+.container h1 {
+    font-size: 18px;
+}
+
+.gameboard {
+    height: 80vw;
+    width: 80vw;
+}
+
+.btn-start {
+    width: 90vw;
+    left: calc(50% - 45vw);
+    font-size: 30px;
+}

@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    background: black;
+    height: 100vh;
+}
+
+.gameboard {
+    height: 500px;
+    width: 500px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 100px auto;
+    max-height: 60vh;
+    max-width: 60vh;
+}
+
+.color {
+    width: 50%;
+    height: 50%;
+    display: inline-block;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: left;
+}
+
+.celeste {
+    background: cyan;
+    opacity: .7;
+}
+
+.celeste.light {
+    opacity: 1;
+}
+
+.violeta {
+    background: violet;
+    opacity: .7;
+}
+
+.violeta.light {
+    opacity: 1;
+}
+
+.naranja {
+    background: orange;
+    opacity: .7;
+}
+
+.naranja.light {
+    opacity: 1;
+}
+
+.verde {
+    background: greenyellow;
+    opacity: .7;
+}
+
+.verde.light {
+    opacity: 1;
+}
+
+.game-container{
+    position: relative;
+}
+
+.hide {
+    display: none;
+}
+
+.btn-start {
+    cursor: pointer;
+    width: 450px;
+    height: 100px;
+    background: #123456;
+    color: #ecf0f1;
+    border: none;
+    border-bottom: 6px solid black;
+    border-radius: 8px;
+    font-size: 3em;
+    position: absolute;
+    top: calc(50% - 20px);
+    left: calc(50% - 225px);
+    transition: .5s;
+    outline: none;
+}
+
+.btn-start:hover {
+    color: cyan;
+    border-bottom: 6px solid black;
+    transform: scale(1.05);
+}
+
+.btn-start:active {
+    transform: scale(.95);
+}
+
+body {
+    flex-direction: column;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+.span-puntos {
+    color: cyan;
+}
+
+.container {
+    display: flex;
+    position: relative;
+    font-size: 15px;
+    margin: 20px;
+    justify-content: center;
+}
+
+.container h1 {
+    margin: 0 20px;
+}
