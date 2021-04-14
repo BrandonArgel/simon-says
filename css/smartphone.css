@@ -8,7 +8,9 @@
 }
 
 .btn-start {
-    width: 90vw;
-    left: calc(50% - 45vw);
-    font-size: 30px;
+    width: 86vw;
+    left: calc(50% - 43vw);
+    font-size: clamp(1em, 7vw, 6em );
+    height: 70px;
+    top: calc(50% - 35px);
 }
