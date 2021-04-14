@@ -6,7 +6,7 @@ const btnEmpezar = document.getElementById("btnEmpezar");
 const puntaje = document.getElementById("puntos");
 const puntajeActual = document.getElementById("puntos__actuales");
 const nivel = document.getElementById("nivel");
-const ULTIMO_NIVEL = 20;
+const ULTIMO_NIVEL = 15;
 
 class Juego {
   constructor() {
