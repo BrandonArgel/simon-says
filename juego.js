@@ -7,7 +7,7 @@ const puntaje = document.getElementById("puntos");
 const puntajeActual = document.getElementById("puntos__actuales");
 const nivel = document.getElementById("nivel");
 const niveles = document.getElementById("niveles");
-const ULTIMO_NIVEL = 1;
+const ULTIMO_NIVEL = 15;
 const body = document.getElementById('body');
 
 class Juego {
