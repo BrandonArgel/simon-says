@@ -6,6 +6,7 @@ const btnEmpezar = document.getElementById("btnEmpezar");
 const puntaje = document.getElementById("puntos");
 const puntajeActual = document.getElementById("puntos__actuales");
 const nivel = document.getElementById("nivel");
+const niveles = document.getElementById("niveles");
 const ULTIMO_NIVEL = 15;
 
 class Juego {
@@ -41,15 +42,19 @@ class Juego {
   }
 
   siguienteNivel() {
-    if (this.nivel >= 8) {
+    if (this.nivel >= 12) {
       nivel.style.color = "red";
-    } else if (this.nivel >= 5) {
+      niveles.style.color = "red";
+    } else if (this.nivel >= 8) {
       nivel.style.color = "yellow";
-    } else if (this.nivel >= 3) {
+      niveles.style.color = "yellow";
+    } else if (this.nivel >= 4) {
       nivel.style.color = "yellowgreen";
+      niveles.style.color = "yellowgreen";
     }
 
     nivel.innerHTML = this.nivel;
+    niveles.innerHTML = (15-this.nivel);
     this.subnivel = 0;
     this.iluminarSecuencia();
     this.agregarEventosClick();
@@ -136,7 +141,7 @@ class Juego {
 
   ganoElJuego() {
     localStorage.setItem("puntos", this.puntos);
-    puntaje.innerHTML = maxScore;
+    puntaje.innerHTML = this.maxScore;
     swal(
       "Simon dice",
       `¡Felicitaciones, Ganaste el Juego! 🥳
@@ -164,7 +169,8 @@ class Juego {
         "Simon Dice",
         `Lo lamentamos perdiste 😢
          Puntos obtenidos:  ${this.puntos}`,
-        "error").then(() => {
+        "error"
+      ).then(() => {
         this.eliminarEventosClick();
         this.inicializar();
       });
