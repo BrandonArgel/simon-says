@@ -7,7 +7,8 @@ const puntaje = document.getElementById("puntos");
 const puntajeActual = document.getElementById("puntos__actuales");
 const nivel = document.getElementById("nivel");
 const niveles = document.getElementById("niveles");
-const ULTIMO_NIVEL = 15;
+const ULTIMO_NIVEL = 1;
+const body = document.getElementById('body');
 
 class Juego {
   constructor() {
@@ -140,6 +141,7 @@ class Juego {
   }
 
   ganoElJuego() {
+    body.classList.add('ganar');
     localStorage.setItem("puntos", this.puntos);
     puntaje.innerHTML = this.maxScore;
     swal(
