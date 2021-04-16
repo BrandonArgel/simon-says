@@ -145,7 +145,8 @@ class Juego {
     swal(
       "Simon dice",
       `¡Felicitaciones, Ganaste el Juego! 🥳
-        Puntos obtenidos:  ${this.puntos} `,
+       Tienes una excelente memoria 🧠
+       Puntos obtenidos:  ${this.puntos}`,
       "success"
     ).then(() => {
       this.inicializar();

@@ -120,6 +120,8 @@ body {
     justify-content: center;
 }
 
-.container h1 {
+.container p {
     margin: 0 20px;
+    font-weight: bold;
+    font-size: 21px;
 }
