@@ -9,6 +9,7 @@ const nivel = document.getElementById("nivel");
 const niveles = document.getElementById("niveles");
 const ULTIMO_NIVEL = 15;
 const body = document.getElementById("body");
+const DELAY = 600;
 
 class Juego {
   constructor() {
@@ -16,12 +17,14 @@ class Juego {
     this.inicializar();
     this.generarSecuencia();
     this.errorSound = new Audio("./assets/audio/error.wav");
+    this.errorSound.volume = 0.05;
     this.sonidos = [
       new Audio("./assets/audio/1.mp3"),
       new Audio("./assets/audio/2.mp3"),
       new Audio("./assets/audio/3.mp3"),
       new Audio("./assets/audio/4.mp3"),
     ];
+    this.sonidos.forEach((sonido) => (sonido.volume = 0.75));
     setTimeout(this.siguienteNivel, 500);
   }
 
@@ -46,7 +49,7 @@ class Juego {
   generarSecuencia() {
     this.secuencia = Array.from({ length: ULTIMO_NIVEL })
       .fill(0)
-      .map((_) => Math.floor(Math.random() * 4));
+      .map(() => Math.floor(Math.random() * 4));
   }
 
   siguienteNivel() {
@@ -65,7 +68,10 @@ class Juego {
     niveles.innerHTML = 15 - this.nivel;
     this.subnivel = 0;
     this.iluminarSecuencia();
-    this.agregarEventosClick();
+
+    // ⏱ Esperar a que termine la secuencia para agregar eventos
+    const duracionSecuencia = this.nivel * DELAY;
+    setTimeout(() => this.agregarEventosClick(), duracionSecuencia);
   }
 
   transformarNumeroAColor(numero) {
@@ -102,7 +108,7 @@ class Juego {
       setTimeout(() => {
         this.sonidos[nummero].play();
         this.iluminarColor(color);
-      }, 600 * i);
+      }, DELAY * i);
     }
   }
 
@@ -132,10 +138,10 @@ class Juego {
   elegirColor(ev) {
     const nombreColor = ev.target.dataset.color;
     const numeroColor = this.transformarColorANumero(nombreColor);
-    this.sonidos[numeroColor].play();
     this.iluminarColor(nombreColor);
 
     if (numeroColor === this.secuencia[this.subnivel]) {
+      this.sonidos[numeroColor].play();
       this.subnivel++;
       this.puntos++;
       puntajeActual.innerHTML = this.puntos;
@@ -150,6 +156,7 @@ class Juego {
         }
       }
     } else {
+      this.errorSound.play();
       this.perdioElJuego();
     }
   }
