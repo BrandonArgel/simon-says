@@ -8,13 +8,20 @@ const puntajeActual = document.getElementById("puntos__actuales");
 const nivel = document.getElementById("nivel");
 const niveles = document.getElementById("niveles");
 const ULTIMO_NIVEL = 15;
-const body = document.getElementById('body');
+const body = document.getElementById("body");
 
 class Juego {
   constructor() {
     this.inicializar = this.inicializar.bind(this);
     this.inicializar();
     this.generarSecuencia();
+    this.errorSound = new Audio("./assets/audio/error.wav");
+    this.sonidos = [
+      new Audio("./assets/audio/1.mp3"),
+      new Audio("./assets/audio/2.mp3"),
+      new Audio("./assets/audio/3.mp3"),
+      new Audio("./assets/audio/4.mp3"),
+    ];
     setTimeout(this.siguienteNivel, 500);
   }
 
@@ -37,9 +44,9 @@ class Juego {
   }
 
   generarSecuencia() {
-    this.secuencia = new Array(ULTIMO_NIVEL)
+    this.secuencia = Array.from({ length: ULTIMO_NIVEL })
       .fill(0)
-      .map((n) => Math.floor(Math.random() * 4));
+      .map((_) => Math.floor(Math.random() * 4));
   }
 
   siguienteNivel() {
@@ -55,7 +62,7 @@ class Juego {
     }
 
     nivel.innerHTML = this.nivel;
-    niveles.innerHTML = (15-this.nivel);
+    niveles.innerHTML = 15 - this.nivel;
     this.subnivel = 0;
     this.iluminarSecuencia();
     this.agregarEventosClick();
@@ -90,7 +97,12 @@ class Juego {
   iluminarSecuencia() {
     for (let i = 0; i < this.nivel; i++) {
       const color = this.transformarNumeroAColor(this.secuencia[i]);
-      setTimeout(() => this.iluminarColor(color), 600 * i);
+      const nummero = this.transformarColorANumero(color);
+
+      setTimeout(() => {
+        this.sonidos[nummero].play();
+        this.iluminarColor(color);
+      }, 600 * i);
     }
   }
 
@@ -120,7 +132,9 @@ class Juego {
   elegirColor(ev) {
     const nombreColor = ev.target.dataset.color;
     const numeroColor = this.transformarColorANumero(nombreColor);
+    this.sonidos[numeroColor].play();
     this.iluminarColor(nombreColor);
+
     if (numeroColor === this.secuencia[this.subnivel]) {
       this.subnivel++;
       this.puntos++;
@@ -141,7 +155,7 @@ class Juego {
   }
 
   ganoElJuego() {
-    body.classList.add('ganar');
+    body.classList.add("ganar");
     localStorage.setItem("puntos", this.puntos);
     puntaje.innerHTML = this.maxScore;
     swal(
@@ -170,7 +184,7 @@ class Juego {
     } else {
       swal(
         "Simon Dice",
-        `Lo lamentamos perdiste 😢
+        `Lo lamentamos, perdiste 😢
          Puntos obtenidos:  ${this.puntos}`,
         "error"
       ).then(() => {
